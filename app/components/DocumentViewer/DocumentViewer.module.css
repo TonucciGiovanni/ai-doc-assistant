@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .pane {
+    flex: 1;
+    border: 1px solid #eaeaea;
+    padding: 1rem;
+    border-radius: 5px;
+    min-height: 60vh;
+  }
+  
+  .content {
+    white-space: pre-wrap;
+    font-family: monospace;
+  }

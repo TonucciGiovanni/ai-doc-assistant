@@ -1,0 +1,79 @@
+.container {
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .content {
+    white-space: pre-wrap;
+    font-family: monospace;
+    line-height: 1.6;
+  }
+  
+  .unchanged {
+    color: #333;
+  }
+  
+  .suggestion {
+    position: relative;
+    background-color: rgba(255, 235, 59, 0.3);
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin: 0 2px;
+  }
+  
+  .originalText {
+    text-decoration: line-through;
+    color: #ff4444;
+    margin-right: 8px;
+  }
+  
+  .suggestedText {
+    color: #4CAF50;
+    font-weight: bold;
+  }
+  
+  .controls {
+    position: absolute;
+    top: -24px;
+    right: 0;
+    display: flex;
+    gap: 4px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 2px;
+  }
+  
+  .accept, .reject {
+    border: none;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .accept {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .reject {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .accept:disabled, .reject:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Suggestion type colors */
+  .grammar {
+    border-left: 3px solid #ff9800;
+  }
+  
+  .clarity {
+    border-left: 3px solid #2196f3;
+  }

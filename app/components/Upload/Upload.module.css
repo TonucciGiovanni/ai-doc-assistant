@@ -1,0 +1,27 @@
+.uploadContainer {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  
+  .uploadLabel {
+    padding: 1rem 2rem;
+    background-color: #0070f3;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .uploadLabel:hover {
+    background-color: #0051a2;
+  }
+  
+  .uploadInput {
+    display: none;
+  }
+
+  .error {
+    color: #ff4444;
+    margin-top: 1rem;
+    text-align: center;
+  }
