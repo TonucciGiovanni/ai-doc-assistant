@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import styles from './ImprovedVersion.module.css';
 import { useDocument } from '../../context/DocumentContext';
 import { DiffHighlighter } from '../DiffHighlighter/DiffHighlighter';
@@ -50,13 +51,14 @@ export const ImprovedVersion = () => {
         suggestions={state.suggestions}
         onAccept={handleAccept}
         onReject={handleReject}
+        data-testid = "suggestion-list"
       />
 
       <div className={styles.actions}>
         <button
           onClick={handleReviewComplete}
           className={styles.reviewButton}
-          disabled={!state.allSuggestionsReviewed}
+          disabled={!state.allSuggestionsReviewed ?? false}
         >
           Review Complete
         </button>

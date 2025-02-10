@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import styles from './Upload.module.css';
 import { useDocument } from '../../context/DocumentContext';
 
@@ -67,7 +68,7 @@ const readFileContent = async (file) => {
 };
 
 export const Upload = () => {
-  const { dispatch } = useDocument();
+  const { dispatch, state = {} } = useDocument();
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
@@ -123,15 +124,18 @@ export const Upload = () => {
   // Render the upload component with the provided styles
   return (
     <div className={styles.uploadContainer}>
-      <label className={styles.uploadLabel}>
+      <label htmlFor="file-upload" className={styles.uploadLabel}>
+      Upload Document
         <input
+          id="file-upload" //id to match htmlFor
           type="file"
           accept=".txt,.docx,.pdf"
           onChange={handleFileUpload}
           className={styles.uploadInput}
         />
-        Upload Document
       </label>
+
+      {state?.loading && <p>processing document....</p>}
     </div>
   );
 };

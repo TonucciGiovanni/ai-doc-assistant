@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 
 const DocumentContext = createContext();
 
@@ -58,7 +58,7 @@ const reducer = (state, action) => {
   }
 };
 
-export const DocumentProvider = ({ children }) => {
+export const DocumentProvider = ({ children, initialState = null }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const checkReviewStatus = () => {
@@ -88,8 +88,7 @@ export const DocumentProvider = ({ children }) => {
 
   return (
     <DocumentContext.Provider
-      value={{ state, dispatch, mergeDocument, checkReviewStatus }}
-    >
+      value={{ state, dispatch, mergeDocument, checkReviewStatus }}>
       {children}
     </DocumentContext.Provider>
   );

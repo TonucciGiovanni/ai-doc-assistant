@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import styles from './DiffHighlighter.module.css';
 
 export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) => {
@@ -26,10 +27,13 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
         <span
           key={suggestion.id}
           className={`${styles.suggestion} ${styles[suggestion.type]}`}
+          data-testid={`suggestion.id-${suggestion.id}`} //added test id
         >
-          <span className={styles.originalText}>
+
+          <span className={styles.originalText} style={{ textDecoration: 'line-through' }}>
             {content.slice(start, end)}
           </span>
+
           <span className={styles.suggestedText}>
             {suggestion.text}
           </span>
@@ -38,6 +42,7 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
               onClick={() => onAccept(suggestion.id)}
               className={styles.accept}
               disabled={suggestion.status === 'accepted'}
+              data-testid={`accept.id-${suggestion.id}`} //added test id
             >
               ✓
             </button>
@@ -45,6 +50,7 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
               onClick={() => onReject(suggestion.id)}
               className={styles.reject}
               disabled={suggestion.status === 'rejected'}
+              data-testid={`reject.id-${suggestion.id}`} //added test id
             >
               ✕
             </button>
@@ -62,12 +68,12 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
       </span>
     );
 
-    return elements.reverse();
+    return elements;
   };
 
   return (
     <div className={styles.container}>
-      <pre className={styles.content}>
+      <pre className={styles.content} data-testid="highlighted-content">
         {getHighlightedContent()}
       </pre>
     </div>
