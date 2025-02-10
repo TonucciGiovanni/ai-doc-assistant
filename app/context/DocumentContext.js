@@ -58,6 +58,7 @@ const reducer = (state, action) => {
   }
 };
 
+// DocumentProvider component to manage document state and provide hooks for consumers
 export const DocumentProvider = ({ children, initialState = null }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 

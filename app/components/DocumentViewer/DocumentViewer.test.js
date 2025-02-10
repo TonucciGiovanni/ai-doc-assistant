@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { DocumentProvider } from '../../context/DocumentContext';
 import { DocumentViewer } from './DocumentViewer';
 
+  // Test initial state with loading: true
 describe('DocumentViewer', () => {
   const initialState = {
     originalDoc: 'Original document content',

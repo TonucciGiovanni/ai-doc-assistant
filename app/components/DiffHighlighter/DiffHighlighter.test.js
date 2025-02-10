@@ -4,13 +4,13 @@ import { DiffHighlighter } from './DiffHighlighter';
 
 test('displays suggestions correctly', () => {
   const suggestions = [{
-    id: 1,
-    start: 0,
-    end: 8,
-    text: 'Improved',
-    original: 'Original',
-    type: 'grammar',
-    status: 'pending',
+    id: 1, 
+    start: 0, // Starting index of the suggestion in the original text
+    end: 40, // Ending index of the suggestion in the original text
+    text: 'Improved', // Suggested text to replace the original
+    original: 'Original', // Original text to be replaced
+    type: 'grammar', // Type of suggestion (e.g., grammar, spelling)
+    status: 'pending', // Current status of the suggestion
   }];
 
   render(

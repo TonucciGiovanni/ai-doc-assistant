@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './DiffHighlighter.module.css';
 
+// A component for highlighting differences between two content strings
 export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) => {
   const getHighlightedContent = () => {
     let content = original;

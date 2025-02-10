@@ -26,18 +26,18 @@ test('allows accepting and rejecting suggestions', async () => {
     </DocumentProvider>
   );
 
-  // ✅ Wait for the suggestion to appear
+  // Wait for the suggestion to appear
   const suggestion = await screen.findByTestId('suggestion.id-1');
   expect(suggestion).toBeInTheDocument();
 
-  // ✅ Accept suggestion
+  // Accept suggestion
   const acceptButton = await screen.findByTestId('accept.id-1');
   fireEvent.click(acceptButton);
 
   // Ensure accept button is disabled after click
   await waitFor(() => expect(acceptButton).toBeDisabled());
 
-  // ✅ Reject suggestion
+  // Reject suggestion
   const rejectButton = await screen.findByTestId('reject.id-1');
   fireEvent.click(rejectButton);
 

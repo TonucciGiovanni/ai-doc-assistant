@@ -5,9 +5,11 @@ import { useDocument } from '../../context/DocumentContext';
 import { ImprovedVersion } from '../ImprovedVersion/ImprovedVersion';
 
 
+// DocumentViewer component that renders the original and improved versions of the uploaded document
 export const DocumentViewer = () => {
   const { state } = useDocument();
 
+  // Check if the state is null, loading, or error before rendering the document viewer
   if (!state) { // Handle null state
     return <p data-testid="loading">Initializing...</p>;
   }

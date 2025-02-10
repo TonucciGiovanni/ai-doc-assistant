@@ -93,8 +93,8 @@ export const Upload = () => {
           text: 'Improved sentence 1',
           type: 'clarity',
           status: 'pending',
-          start: 50,  // Character start index
-          end: 68     // Character end index
+          start: 0,  // Character start index
+          end: 60     // Character end index
         },
         {
           id: 2,
@@ -102,8 +102,8 @@ export const Upload = () => {
           text: 'Improved sentence 2',
           type: 'grammar',
           status: 'pending',
-          start: 70,
-          end: 88
+          start: 40,
+          end: 100
         }
       ];
 
