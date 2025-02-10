@@ -9,9 +9,10 @@ const initialState = {
   loading: false,
   error: null,
   finalDoc: null,
-  allSuggestionsReviewed: false, // Add this line
+  allSuggestionsReviewed: false,
 };
 
+//Reducer function for managing document state
 const reducer = (state, action) => {
   switch (action.type) {
     case 'RESET_DOCUMENT':
@@ -42,7 +43,7 @@ const reducer = (state, action) => {
             : suggestion
         ),
       };
-    case 'SET_FINAL_DOCUMENT': // Add this new case
+    case 'SET_FINAL_DOCUMENT': 
       return {
         ...state,
         finalDoc: action.payload,

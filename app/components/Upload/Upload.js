@@ -106,6 +106,7 @@ export const Upload = () => {
         }
       ];
 
+      // Dispatch the uploaded document details to the DocumentContext
       dispatch({
         type: 'UPLOAD_SUCCESS',
         payload: {
@@ -119,6 +120,7 @@ export const Upload = () => {
     }
   };
 
+  // Render the upload component with the provided styles
   return (
     <div className={styles.uploadContainer}>
       <label className={styles.uploadLabel}>

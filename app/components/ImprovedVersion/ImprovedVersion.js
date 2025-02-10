@@ -3,22 +3,29 @@ import styles from './ImprovedVersion.module.css';
 import { useDocument } from '../../context/DocumentContext';
 import { DiffHighlighter } from '../DiffHighlighter/DiffHighlighter';
 
+
+// ImprovedVersion component for displaying and managing document improvements.
 export const ImprovedVersion = () => {
   const { state, dispatch, mergeDocument, checkReviewStatus } = useDocument();
 
+  // Handles the acceptance of a suggestion
   const handleAccept = (id) => {
     dispatch({ type: 'UPDATE_SUGGESTION', payload: { id, status: 'accepted' } });
     checkReviewStatus();
   };
 
+//Handles the rejection of a suggestion.
   const handleReject = (id) => {
     dispatch({ type: 'UPDATE_SUGGESTION', payload: { id, status: 'rejected' } });
     checkReviewStatus();
   };
 
+  // Handles the completion of the review process.
   const handleReviewComplete = () => {
     mergeDocument();
   };
+  
+  // Handles the submission of a suggestion.
 
   const handleDownload = () => {
     if (!state.finalDoc) return;
@@ -32,6 +39,7 @@ export const ImprovedVersion = () => {
     document.body.removeChild(element);
   };
 
+  // Renders the ImprovedVersion component.
   return (
     <div className={styles.container}>
       <h3>Document with Suggested Changes</h3>
