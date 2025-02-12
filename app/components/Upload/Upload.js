@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Upload.module.css';
 import { useDocument } from '../../context/DocumentContext';
 // import { original } from '@reduxjs/toolkit';
-import { checkGrammar} from '../../../lib/languageTool'
+import { checkGrammar} from '../../../lib/languageTool';
 
 const allowedTypes = [
   'text/plain',
