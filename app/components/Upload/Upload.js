@@ -2,6 +2,8 @@
 import React from 'react';
 import styles from './Upload.module.css';
 import { useDocument } from '../../context/DocumentContext';
+// import { original } from '@reduxjs/toolkit';
+import { checkGrammar} from '../../../lib/languageTool'
 
 const allowedTypes = [
   'text/plain',
@@ -84,36 +86,50 @@ export const Upload = () => {
     try {
       const content = await readFileContent(file);
 
+      // call LanguageTool API for grammar suggestions
+      const suggestions = await checkGrammar(content);
+
+      //map LanguageTool suggestions to app's format
+      const formattedSuggestions = suggestions.map((suggestion, index) => ({
+        id: index + 1,
+        original: content.substring(suggestion.offset, suggestion.offset + suggestion.length),
+        text: suggestion.replacements[0]?.value || suggestion.message,
+        type: suggestion.rule.issueType || 'grammar',
+        status: 'pending',
+        start: suggestion.offset,
+        end: suggestion.offset + suggestion.length,
+      }));
+
       // Simulated API response
-      const improvedContent = content + "\n\n[Simulated improvements]";
-      const simulatedSuggestions = [
-        {
-          id: 1,
-          original: 'Original sentence 1',
-          text: 'Improved sentence 1',
-          type: 'clarity',
-          status: 'pending',
-          start: 0,  // Character start index
-          end: 100     // Character end index
-        },
-        {
-          id: 2,
-          original: 'Original sentence 2',
-          text: 'Improved sentence 2',
-          type: 'grammar',
-          status: 'pending',
-          start: 200,
-          end: 1000
-        }
-      ];
+      // const improvedContent = content + "\n\n[Simulated improvements]";
+      // const simulatedSuggestions = [
+      //   {
+      //     id: 1,
+      //     original: 'Original sentence 1',
+      //     text: 'Improved sentence 1',
+      //     type: 'clarity',
+      //     status: 'pending',
+      //     start: 0,  // Character start index
+      //     end: 100     // Character end index
+      //   },
+      //   {
+      //     id: 2,
+      //     original: 'Original sentence 2',
+      //     text: 'Improved sentence 2',
+      //     type: 'grammar',
+      //     status: 'pending',
+      //     start: 200,
+      //     end: 1000
+      //   }
+      // ];
 
       // Dispatch the uploaded document details to the DocumentContext
       dispatch({
         type: 'UPLOAD_SUCCESS',
         payload: {
           original: content,
-          improved: improvedContent,
-          suggestions: simulatedSuggestions,
+          improved: content, //updated when changes are applied
+          suggestions: formattedSuggestions,
         },
       });
     } catch (error) {

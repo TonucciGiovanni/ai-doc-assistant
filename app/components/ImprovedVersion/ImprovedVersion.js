@@ -21,9 +21,8 @@ export const ImprovedVersion = () => {
     checkReviewStatus();
   };
 
-  // Handles the completion of the review process.
   const handleReviewComplete = () => {
-    mergeDocument();
+    mergeDocument(); //Applies accepted changes to the finalDocument
   };
   
   // Handles the submission of a suggestion.
@@ -47,24 +46,24 @@ export const ImprovedVersion = () => {
       
       <DiffHighlighter
         original={state.originalDoc}
-        improved={state.improvedDoc}
+        // improved={state.improvedDoc}
         suggestions={state.suggestions}
         onAccept={handleAccept}
         onReject={handleReject}
-        data-testid = "suggestion-list"
+        // data-testid = "suggestion-list"
       />
 
       <div className={styles.actions}>
         <button
           onClick={handleReviewComplete}
           className={styles.reviewButton}
-          disabled={!state.allSuggestionsReviewed ?? false}
+          disabled={!state.allSuggestionsReviewed}
         >
           Review Complete
         </button>
 
         {state.finalDoc && (
-          <button onClick={handleDownload} className={styles.downloadButton}>
+          <button onClick={handleDownload (state.finalDoc)} className={styles.downloadButton}>
             Download Final Document
           </button>
         )}

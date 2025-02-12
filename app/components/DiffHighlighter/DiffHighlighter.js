@@ -15,22 +15,21 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
     sortedSuggestions.forEach((suggestion) => {
       const start = suggestion.start;
       const end = suggestion.end;
-      
+
       // Add text after the suggestion
       elements.unshift(
         <span key={`after-${suggestion.id}`} className={styles.unchanged}>
           {content.slice(end, lastIndex)}
         </span>
       );
-      
+
       // Add the suggestion
       elements.unshift(
         <span
           key={suggestion.id}
           className={`${styles.suggestion} ${styles[suggestion.type]}`}
-          data-testid={`suggestion.id-${suggestion.id}`} //added test id
+          data-testid={`suggestion-${suggestion.id}`}
         >
-
           <span className={styles.originalText} style={{ textDecoration: 'line-through' }}>
             {content.slice(start, end)}
           </span>
@@ -38,22 +37,24 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
           <span className={styles.suggestedText}>
             {suggestion.text}
           </span>
+
           <div className={styles.controls}>
             <button
               onClick={() => onAccept(suggestion.id)}
               className={styles.accept}
               disabled={suggestion.status === 'accepted'}
-              data-testid={`accept.id-${suggestion.id}`} //added test id
+              data-testid={`accept-${suggestion.id}`}
             >
-              ✓
+              ✓ Accept
             </button>
+
             <button
               onClick={() => onReject(suggestion.id)}
               className={styles.reject}
               disabled={suggestion.status === 'rejected'}
-              data-testid={`reject.id-${suggestion.id}`} //added test id
+              data-testid={`reject-${suggestion.id}`}
             >
-              ✕
+              ✕ Reject
             </button>
           </div>
         </span>
