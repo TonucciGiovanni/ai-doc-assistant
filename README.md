@@ -20,7 +20,7 @@ Tech Stack
 
  How It Works  
 1. Upload a document  
-2. Grammar check begins** (via LanguageTool API)  
+2. Grammar check begins (via LanguageTool API)  
 3. View suggestions & select changes  
 4.  Apply corrections & preview final document  
 5.  ownload the improved version  
