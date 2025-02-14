@@ -15,14 +15,20 @@ const initialState = {
 //Reducer function for managing document state
 const reducer = (state, action) => {
   switch (action.type) {
+
+    //reset state but keeps updated doc
     case 'RESET_DOCUMENT':
       return {
         ...initialState,
         originalDoc: action.payload,
-        improvedDoc: action.payload,
+        improvedDoc: action.payload, // uploaded document
       };
+
+      //set loading: true, clear errors
     case 'UPLOAD_START':
       return { ...state, loading: true, error: null };
+
+      // update original doc, improved doc and suggestions, reset final doc
     case 'UPLOAD_SUCCESS':
       return {
         ...state,
@@ -32,8 +38,12 @@ const reducer = (state, action) => {
         suggestions: action.payload.suggestions,
         finalDoc: null, // Reset finalDoc on new upload
       };
+
+      //stop loading, store error messages
     case 'UPLOAD_ERROR':
       return { ...state, loading: false, error: action.payload };
+
+      // update suggestion status
     case 'UPDATE_SUGGESTION':
       return {
         ...state,
@@ -43,11 +53,15 @@ const reducer = (state, action) => {
             : suggestion
         ),
       };
+
+      //save final version of the document
     case 'SET_FINAL_DOCUMENT': 
       return {
         ...state,
         finalDoc: action.payload,
       };
+
+      // marks all suggestions as reviewed
     case 'UPDATE_REVIEW_STATUS':
         return {
           ...state,
@@ -58,10 +72,11 @@ const reducer = (state, action) => {
   }
 };
 
-// DocumentProvider component to manage document state and provide hooks for consumers
+// DocumentProvider component to manage document state and custom hook to access it easily
 export const DocumentProvider = ({ children, initialState = null }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // check if all suggestions have been either accepted or rejected
   const checkReviewStatus = () => {
     const allReviewed = state.suggestions.every(
       (suggestion) => suggestion.status !== 'pending'
@@ -87,6 +102,7 @@ export const DocumentProvider = ({ children, initialState = null }) => {
     dispatch({ type: 'SET_FINAL_DOCUMENT', payload: content });
   };
 
+  // document state and actions to children
   return (
     <DocumentContext.Provider
       value={{ state, dispatch, mergeDocument, checkReviewStatus }}>

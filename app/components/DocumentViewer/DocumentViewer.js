@@ -35,6 +35,7 @@ export const DocumentViewer = () => {
         <h3>Improved Version</h3>
         <pre className={styles.content} data-testid="improved-doc">{state.improvedDoc || "No improved version."}
         </pre>
+        {/* display edits and highlight differences */}
         <ImprovedVersion />
       </div>
     </div>

@@ -7,6 +7,7 @@ import { Upload } from './Upload';
 test('handles file upload', async () => {
   const file = new File(['test content'], 'test.txt', { type: 'text/plain' });
 
+  // access to document state
   render(
     <DocumentProvider>
       <Upload />

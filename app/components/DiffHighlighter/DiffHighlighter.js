@@ -16,14 +16,14 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
       const start = suggestion.start;
       const end = suggestion.end;
 
-      // Add text after the suggestion
+      // Add text after the suggestion. Adds to the beginning of the elements[]
       elements.unshift(
         <span key={`after-${suggestion.id}`} className={styles.unchanged}>
           {content.slice(end, lastIndex)}
         </span>
       );
 
-      // Add the suggestion
+      // highlight text differences to allow user to accept or reject changes
       elements.unshift(
         <span
           key={suggestion.id}
@@ -52,7 +52,7 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
               onClick={() => onReject(suggestion.id)}
               className={styles.reject}
               disabled={suggestion.status === 'rejected'}
-              data-testid={`reject-${suggestion.id}`}
+              data-testid={`reject-${suggestion.id}`} //adds a unique identifier for the testing
             >
               ✕ Reject
             </button>
@@ -73,6 +73,7 @@ export const DiffHighlighter = ({ original, suggestions, onAccept, onReject }) =
     return elements;
   };
 
+  // Render the processed content with buttons to accept or reject changes
   return (
     <div className={styles.container}>
       <pre className={styles.content} data-testid="highlighted-content">

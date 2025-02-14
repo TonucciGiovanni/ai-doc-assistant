@@ -5,8 +5,7 @@ import { DocumentViewer } from './components/DocumentViewer/DocumentViewer';
 import './styles/globals.css';
 
 
-// Home component that serves as the main entry point for the AI Document Assistant application.
-//  provides the necessary context and renders the main UI components.
+// Home component that serves as the main entry point for the AI Document Assistant application. provides the necessary context and renders the main UI components.
 
 export default function Home() {
   return (

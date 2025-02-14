@@ -20,6 +20,7 @@ test('allows accepting and rejecting suggestions', async () => {
     ],
   };
 
+  // component has access to the document data and suggestions
   render(
     <DocumentProvider initialState={initialState}>
       <ImprovedVersion />
@@ -30,7 +31,7 @@ test('allows accepting and rejecting suggestions', async () => {
   const suggestion = await screen.findByTestId('suggestion.id-1');
   expect(suggestion).toBeInTheDocument();
 
-  // Accept suggestion
+  // Accept suggestion (simulates a click on the accept button)
   const acceptButton = await screen.findByTestId('accept.id-1');
   fireEvent.click(acceptButton);
 

@@ -5,24 +5,31 @@ import { useDocument } from '../../context/DocumentContext';
 // import { original } from '@reduxjs/toolkit';
 import { checkGrammar} from '../../../lib/languageTool';
 
+// file types supported for uploading
 const allowedTypes = [
   'text/plain',
   'application/pdf',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // Word (.docx)
 ];
 
+// read file content of the uploaded file and extract text from different file types
 const readFileContent = async (file) => {
+
+  // wait for file to be read
   return new Promise((resolve, reject) => {
+
+    //API to read uploaded file
     const reader = new FileReader();
 
     reader.onload = async (e) => {
-      const content = e.target.result;
+      const content = e.target.result; // file content
 
       // Handle PDF files
       if (file.type === 'application/pdf') {
         const pdfjs = await import('pdfjs-dist');
         pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
+        // load PDF document
         try {
           const loadingTask = pdfjs.getDocument(new Uint8Array(content));
           const pdf = await loadingTask.promise;
@@ -56,7 +63,7 @@ const readFileContent = async (file) => {
 
     reader.onerror = reject;
 
-    // Read the file as ArrayBuffer for DOCX and PDF, or as text for TXT
+    // Read the file as ArrayBuffer/binary data for DOCX and PDF, or as text for TXT
     if (
       file.type === 'application/pdf' ||
       file.type ===
@@ -69,13 +76,17 @@ const readFileContent = async (file) => {
   });
 };
 
+// using an external API 
 export const Upload = () => {
+
+  // aceess the document content
   const { dispatch, state = {} } = useDocument();
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    // validate file type
     if (!allowedTypes.includes(file.type)) {
       dispatch({ type: 'UPLOAD_ERROR', payload: 'Invalid file type' });
       return;
